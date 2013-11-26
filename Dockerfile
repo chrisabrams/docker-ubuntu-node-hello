@@ -1,6 +1,8 @@
-# DOCKER-VERSION 0.6.6
+# DOCKER-VERSION 0.7.0
 
 FROM ubuntu:12.04
+
+RUN echo "deb http://us.archive.ubuntu.com/ubuntu/ precise universe" >> /etc/apt/sources.list
 
 # Package up project
 ADD . /opt/src
@@ -24,8 +26,5 @@ RUN . ~/.bashrc
 ## Install project dependencies
 RUN cd /opt/src; npm install
 
-## This allows port 8080 to be seen outside the container
-EXPOSE 8080
-
 # Run the node server
-CMD ["node", "index.js"]
+CMD ["node", "/opt/src/index.js"]
